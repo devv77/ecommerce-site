@@ -4,17 +4,45 @@ import 'firebase/compat/auth';
 
 
 const config = {
-    apiKey: "AIzaSyDeJuMohsC_Di5M1BuI5OZDPd9WaDhR0CM",
-    authDomain: "crwn-udemy-db.firebaseapp.com",
-    databaseURL: 'https://crwn-udemy-db-default-rtdb.europe-west1.firebasedatabase.app/',
-    projectId: "crwn-udemy-db",
-    storageBucket: "crwn-udemy-db.appspot.com",
-    messagingSenderId: "448717205388",
-    appId: "1:448717205388:web:cc6412c705df29c577b0a9",
-    measurementId: "G-RNTV8LLYPJ"
+  apiKey: "AIzaSyC7mfPR-DfXWiZwZpW5fJOpTN1P1Ehioug",
+  authDomain: "crwn-db-e4e9c.firebaseapp.com",
+  projectId: "crwn-db-e4e9c",
+  storageBucket: "crwn-db-e4e9c.appspot.com",
+  messagingSenderId: "393143648348",
+  appId: "1:393143648348:web:9137044fe56e8c0cff6699",
+  measurementId: "G-341SFYTNV9",
+};
+  firebase.initializeApp(config);
+
+
+  export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+
+    if (!snapShot.exists) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData,
+        });
+      } catch (error) {
+        console.log("error creating user", error.message);
+      }
+    }
+    //console.log(snapShot)
+
+    return userRef;
+    
   };
 
-  firebase.initializeApp(config);
+  
 
   export const auth=firebase.auth();
   export const firestore=firebase.firestore();

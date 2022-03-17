@@ -2,22 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider} from 'react-redux';
 
+import store from './redux/store'
 import './index.css';
 import App from './App';
 //import HomePage from './pages/homepage/homepage.component';
 
 ReactDOM.render(
-  
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  
- /*
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  */
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,  
   document.getElementById("root")
 );
 

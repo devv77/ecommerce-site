@@ -1,5 +1,5 @@
 import React from 'react';
-import  { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import  { BrowserRouter as Switch, Route} from 'react-router-dom';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component'
@@ -13,7 +13,9 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = { currentUser: null };
+    this.state = {
+       currentUser: null 
+      };
   }
 
   unsubscribeFromAuth=null
@@ -49,16 +51,14 @@ class App extends React.Component {
 
   render() {
     return (
-      //<Router>
       <div>
-        <Header currentUser={this.state.currentUser}/>
+        <Header currentUser={this.state.currentUser} />
         <Switch>
           <Route exact path="/" component={HomePage}></Route>
           <Route path="/shop" component={ShopPage} />
           <Route path="/signIn" component={SignInPage} />
         </Switch>
       </div>
-      //</Router>
     );
   }
 }
